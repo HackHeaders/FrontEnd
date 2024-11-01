@@ -1,4 +1,36 @@
-<script setup></script>
+<script setup>
+import { ref, watch } from 'vue'
+import { useClientStore } from '@/stores';
+import { useCepStore } from '@/stores/address/cep';
+
+const clientStore = useClientStore();
+const cep = ref('');
+const cepStore = useCepStore();
+const dados = ref('');
+const searchCep = async () => {
+    try {
+        await cepStore.getEndereco(cep.value);
+        dados.value = cepStore.address;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const clear = () => {
+  cep.value = '';
+}
+watch(cep, async() => {
+  if (cep.value.length == 8) {
+    console.log('certo')
+}
+}
+)
+function sendData(data){
+    console.log(data);
+    alert('Dados enviados com sucesso');
+    alert(JSON.stringify(data));
+}
+</script>
 <template>
   <form @submit.prevent>
     <label for="">Estado</label>
@@ -6,9 +38,9 @@
     <label for="">Cidade</label>
     <input type="text" placeholder="Insira sua cidade" />
     <label for="">CEP</label>
-    <input type="text" placeholder="Insira seu CEP" />
+    <input type="text" placeholder="Insira seu CEP" v-model="cep" />
     <label for="">Bairro</label>
-    <input type="text" placeholder="Insira seu bairro" />
+    <input type="text" placeholder="Insira se u bairro" />
     <label for="">Endereço</label>
     <input type="text" placeholder="Insira seu endereço" />
     <label for="">Número</label>

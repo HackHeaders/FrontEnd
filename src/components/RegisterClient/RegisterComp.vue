@@ -94,13 +94,13 @@ h1 {
   }
   to {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-20%);
   }
 }
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(20%);
   }
   to {
     opacity: 1;
@@ -114,13 +114,13 @@ h1 {
   }
   to {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(20%);
   }
 }
 @keyframes slideInReverse {
   from {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-20%);
   }
   to {
     opacity: 1;

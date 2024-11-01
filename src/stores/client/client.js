@@ -7,6 +7,22 @@ export const useClientStore = defineStore("client",
         const state = reactive({
             clients: [],
             client: reactive({
+                type: '',
+                cpf_cnpj: 0,
+                name: '',
+                email: '',
+                date_birth: 0,
+                username: '',
+                address:{
+                    cep: 0,
+                    street: '',
+                    number: 0,
+                    complement: '',
+                    neighborhood: '',
+                    city: '',
+                    state: '',
+                },
+                telephone: 0,
             }),
             loading: false,
             error: null

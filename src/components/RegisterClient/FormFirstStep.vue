@@ -1,16 +1,25 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import { useClientStore } from '@/stores';
+
+const clientStore = useClientStore();
+
+</script>
 <template>
   <form @submit.prevent>
     <label for="">Email</label>
-    <input type="email" placeholder="Insira seu email" />
+    <input type="email" placeholder="Insira seu email" v-model="clientStore.state.client.email" />
     <label for="">Nome</label>
-    <input type="text" placeholder="Insira seu nome" />
-    <label for="">Senha</label>
-    <input type="password" placeholder="Insira sua senha" />
+    <input type="text" placeholder="Insira seu nome" v-model="clientStore.state.client.name"/>
     <label for="">Telefone</label>
-    <input type="tel" placeholder="Insira seu telefone" />
+    <input type="tel" placeholder="Insira seu telefone" v-model="clientStore.state.client.telephone"/>
     <label for="">CPF ou CNPJ</label>
-    <input type="text" placeholder="Insira seu CPF ou CNPJ" />
+    <input type="text" placeholder="Insira seu CPF ou CNPJ" v-model="clientStore.state.client.cpf_cnpj" />
+    <label for="">Tipo de pessoa</label>
+    <select name="type" id="type" v-model="clientStore.state.client.type">
+      <option value="f">Física</option>
+      <option value="j">Jurídica</option>
+    </select>
     <button @click="$emit('next')">Próximo</button>
   </form>
 </template>
@@ -40,7 +49,14 @@ form {
     color: main.$standard-white;
     background-color: main.$standard-black;
   }
-
+  select{
+    height: 3.25rem;
+    border-radius: 1rem;
+    border: 1px solid main.$standard-white;
+    padding: 0 10px;
+    color: main.$standard-white;
+    background-color: main.$standard-black;
+  }
   button {
     width: 100%;
     height: 3rem;
