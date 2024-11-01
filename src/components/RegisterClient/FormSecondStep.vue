@@ -21,7 +21,8 @@ const clear = () => {
 }
 watch(cep, async() => {
   if (cep.value.length == 8) {
-    console.log('certo')
+    await searchCep();
+    console.log(dados.value)
 }
 }
 )
