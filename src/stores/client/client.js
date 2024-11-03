@@ -43,7 +43,8 @@ export const useClientStore = defineStore("client",
         const createClient = async (newClient) => {
             state.loading = true;
             try {
-                state.orders.push(await ClientService.createClient(newClient));
+                state.clients.push(await ClientService.createClient(newClient));
+                console.log(state.clients)
             } catch (error) {
                 state.error = error;
             } finally {

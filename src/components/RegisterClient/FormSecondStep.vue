@@ -23,6 +23,10 @@ watch(cep, async() => {
   if (cep.value.length == 8) {
     await searchCep();
     console.log(dados.value)
+    clientStore.state.client.address.cep = cep.value;
+    clientStore.state.client.address.city = dados.value.cidade;
+    clientStore.state.client.address.state = dados.value.uf;
+    clientStore.state.client.address.neighborhood = dados.value.bairro;
 }
 }
 )
@@ -34,21 +38,21 @@ function sendData(data){
 </script>
 <template>
   <form @submit.prevent>
-    <label for="">Estado</label>
-    <input type="text" placeholder="Insira seu estado" />
-    <label for="">Cidade</label>
-    <input type="text" placeholder="Insira sua cidade" />
     <label for="">CEP</label>
     <input type="text" placeholder="Insira seu CEP" v-model="cep" />
+    <label for="">Estado</label>
+    <input type="text" placeholder="Insira seu estado" v-model="clientStore.state.client.address.state" disabled/>
+    <label for="">Cidade</label>
+    <input type="text" placeholder="Insira sua cidade" v-model="clientStore.state.client.address.city" disabled/>
     <label for="">Bairro</label>
-    <input type="text" placeholder="Insira se u bairro" />
-    <label for="">Endereço</label>
-    <input type="text" placeholder="Insira seu endereço" />
+    <input type="text" placeholder="Insira seu bairro" v-model="clientStore.state.client.address.neighborhood"/>
+    <label for="">Rua</label>
+    <input type="text" placeholder="Insira sua rua" v-model="clientStore.state.client.address.street"/>
     <label for="">Número</label>
-    <input type="text" placeholder="Insira seu número" />
+    <input type="text" placeholder="Insira seu número" v-model="clientStore.state.client.address.number"/>
     <label for="">Complemento</label>
-    <input type="text" placeholder="Insira um complemento" />
-    <button class="normalColor" @click="$emit('next')">Finalizar</button>
+    <input type="text" placeholder="Insira um complemento" v-model="clientStore.state.client.address.complement" />
+    <button class="normalColor" @click="clientStore.createClient(clientStore.state.client)">Finalizar</button>
     <button class="invertColor" @click="$emit('back')">Voltar</button>
   </form>
 </template>
