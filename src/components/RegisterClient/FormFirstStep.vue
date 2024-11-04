@@ -11,6 +11,10 @@ const clientStore = useClientStore();
     <input type="email" placeholder="Insira seu email" v-model="clientStore.state.client.email" />
     <label for="">Nome</label>
     <input type="text" placeholder="Insira seu nome" v-model="clientStore.state.client.name"/>
+    <label for="">Username</label>
+    <input type="text" placeholder="Insira seu username" v-model="clientStore.state.client.username"/>
+    <label for="">Data de nascimento</label>
+    <input type="date" v-model="clientStore.state.client.date_birth">
     <label for="">Telefone</label>
     <input type="tel" placeholder="Insira seu telefone" v-model="clientStore.state.client.telephone"/>
     <label for="">CPF ou CNPJ</label>

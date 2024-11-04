@@ -44,7 +44,6 @@ export const useClientStore = defineStore("client",
             state.loading = true;
             try {
                 state.clients.push(await ClientService.createClient(newClient));
-                console.log(state.clients)
             } catch (error) {
                 state.error = error;
             } finally {
