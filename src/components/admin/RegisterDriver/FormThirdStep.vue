@@ -1,22 +1,60 @@
-<script setup></script>
+<script setup>
+import { ref, watch } from 'vue'
+import { useDriverStore } from '@/stores';
+import { useCepStore } from '@/stores/address/cep';
+
+const driverStore = useDriverStore();
+const cep = ref('');
+const cepStore = useCepStore();
+const dados = ref('');
+const searchCep = async () => {
+    try {
+        await cepStore.getEndereco(cep.value);
+        dados.value = cepStore.address;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const clear = () => {
+  cep.value = '';
+}
+watch(cep, async() => {
+  if (cep.value.length == 8) {
+    await searchCep();
+    console.log(dados.value)
+    driverStore.state.driver.address.cep = cep.value;
+    driverStore.state.driver.address.city = dados.value.cidade;
+    driverStore.state.driver.address.state = dados.value.uf;
+    driverStore.state.driver.address.neighborhood = dados.value.bairro;
+}
+}
+)
+function sendData(data){
+    console.log(data);
+    alert('Dados enviados com sucesso');
+    alert(JSON.stringify(data));
+}
+
+</script>
 <template>
   <h2>Endereço</h2>
   <form @submit.prevent>
     <label for="">Estado</label>
-    <input type="text" placeholder="Insira seu estado" />
+    <input type="text" placeholder="Insira seu estado" v-model="driverStore.state.driver.state"/>
     <label for="">Cidade</label>
-    <input type="text" placeholder="Insira sua cidade" />
+    <input type="text" placeholder="Insira sua cidade" v-model="driverStore.state.driver.city"/>
     <label for="">CEP</label>
-    <input type="text" placeholder="Insira seu CEP" />
+    <input type="text" placeholder="Insira seu CEP" v-model="driverStore.state.driver.cep"/>
     <label for="">Bairro</label>
-    <input type="text" placeholder="Insira seu bairro" />
+    <input type="text" placeholder="Insira seu bairro" v-model="driverStore.state.driver.neighborhood"/>
     <label for="">Endereço</label>
-    <input type="text" placeholder="Insira seu endereço" />
+    <input type="text" placeholder="Insira seu endereço" v-model="driverStore.state.driver.street"/>
     <label for="">Número</label>
-    <input type="text" placeholder="Insira seu número" />
+    <input type="text" placeholder="Insira seu número" v-model="driverStore.state.driver.number"/>
     <label for="">Complemento</label>
-    <input type="text" placeholder="Insira um complemento" />
-    <button class="normalColor">Finalizar</button>
+    <input type="text" placeholder="Insira um complemento" v-model="driverStore.state.driver.complement"/>
+    <button class="normalColor" @click="driverStore.createDriver(driverStore.state.driver)" >Finalizar</button>
     <button class="invertColor" @click="$emit('back')">Voltar</button>
   </form>
 </template>

@@ -1,34 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { useDriverStore } from '@/stores';
 
-const selectedGender = ref(null)
+const driverStore = useDriverStore();
 
-const selectGender = (gender) => {
-  selectedGender.value = gender
-}
+
 </script>
 
 <template>
   <h2>Dados <span class="strong-pink">Pessoais</span></h2>
   <form @submit.prevent>
     <label for="">Nome</label>
-    <input type="text" placeholder="Insira seu nome" />
+    <input type="text" placeholder="Insira seu nome"  v-model="driverStore.state.driver.name" />
     <label for="">Email</label>
-    <input type="email" placeholder="Insira seu email" />
-    <label for="">Senha</label>
-    <input type="password" placeholder="Insira sua senha" />
+    <input type="email" placeholder="Insira seu email" v-model="driverStore.state.driver.email"/>
     <label for="">CPF</label>
-    <input type="text" placeholder="Insira seu CPF" />
+    <input type="text" placeholder="Insira seu CPF" v-model="driverStore.state.driver.cpf"/>
     <label for="">Data de Nascimento</label>
-    <input type="date" placeholder="Insira sua data de nascimento" />
+    <input type="date" placeholder="Insira sua data de nascimento" v-model="driverStore.state.driver.date_birth"/>
     <label for="">Telefone</label>
-    <input type="tel" placeholder="Insira seu telefone" />
-    <div class="GenderSelection">
-      <button @click="selectGender('man')" :class="{ selectedPink: selectedGender === 'man' }">
-        <img src="/public/man-icon.svg" alt="Ícone masculino" />
-      </button>
-      <button @click="selectGender('woman')" :class="{ selectedPink: selectedGender === 'woman' }"> <img src="/public/woman-icon.svg" alt="Ícone feminino" /></button>
-    </div>
+    <input type="tel" placeholder="Insira seu telefone" v-model="driverStore.state.driver.telephone"/>
     <button @click="$emit('next')">Próximo</button>
   </form>
 </template>
@@ -83,31 +73,5 @@ form {
 button:hover {
   background-color: main.$standard-black;
   color: main.$standard-pink;
-}
-.GenderSelection {
-  display: flex;
-  justify-content: space-around;
-  margin: 1rem 0;
-  button {
-    width: 45%;
-    height: 2.75rem;
-    border: 2px solid main.$standard-white;
-    border-radius: 1rem;
-    background-color: main.$standard-black;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-  }
-  button:hover {
-    background-color: main.$standard-pink;
-    border: 2px solid main.$standard-pink;
-    color: main.$standard-black;
-  }
-  .selectedPink {
-    background-color: main.$standard-pink;
-    border: 2px solid main.$standard-pink;
-    color: main.$standard-black;
-  }
 }
 </style>
