@@ -1,47 +1,30 @@
 <script setup>
-import { ref } from 'vue'
+import { useEmployeeStore } from '@/stores';
 
-const selectedGender = ref(null)
-
-const selectGender = (gender) => {
-  selectedGender.value = gender
-}
-
-const selectStaff = ref(null)
-
-const selectStaffOption = (option) => {
-  selectStaff.value = option
-}
-
+const employeeStore = useEmployeeStore();
 </script>
 <template>
   <form @submit.prevent>
     <label for="">Nome</label>
-    <input type="text" placeholder="Insira seu nome" />
+    <input type="text" placeholder="Insira seu nome" v-model="employeeStore.state.employee.name"/>
     <label for="">Email</label>
-    <input type="email" placeholder="Insira seu email" />
-    <label for="">Senha</label>
-    <input type="password" placeholder="Insira sua senha" />
+    <input type="email" placeholder="Insira seu email" v-model="employeeStore.state.employee.email"/>
+    <label for="">Username</label>
+    <input type="text" placeholder="Insira seu username" v-model="employeeStore.state.employee.username">
+    <label for="">Data de nascimento</label>
+    <input type="date" v-model="employeeStore.state.employee.date_birth"/>
     <label for="">CPF</label>
-    <input type="text" placeholder="Insira seu CPF" />
+    <input type="text" placeholder="Insira seu CPF" v-model="employeeStore.state.employee.cpf"/>
     <label for="">Telefone</label>
-    <input type="tel" placeholder="Insira seu telefone" />
+    <input type="tel" placeholder="Insira seu telefone" v-model="employeeStore.state.employee.telephone"/>
     <label for="">Cargo</label>
-    <select name="opcoes" id="opcoes"></select>
-    <div>
-      <label for="">É staff?</label>
-      <button @click="selectStaffOption('sim')" :class="{ selectedPink: selectStaff === 'sim'}">Sim</button>
-      <button @click="selectStaffOption('nao')" :class="{ selectedPink: selectStaff === 'nao'}">Não</button>
-    </div>
-      <div class="GenderSelection">
-        <button @click="selectGender('man')" :class="{ selectedPink: selectedGender === 'man' }">
-          <img src="/public/man-icon.svg" alt="Ícone masculino" />
-        </button>
-        <button
-          @click="selectGender('woman')" :class="{ selectedPink: selectedGender === 'woman' }">
-          <img src="/public/woman-icon.svg" alt="Ícone feminino" />
-        </button>
-      </div>
+    <select name="opcoes" id="opcoes" v-model="employeeStore.state.employee.office">
+      <option value="1">Gerente</option>
+      <option value="2">Vice Gerente</option>
+      <option value="3">Administrador</option>
+    </select>
+    <label for="">Data de contratação</label>
+    <input type="date"  v-model="employeeStore.state.employee.date_admission"/>
     <button @click="$emit('next')">Próximo</button>
   </form>
 </template>
@@ -126,7 +109,7 @@ form {
   }
 
   select {
-    height: 2rem;
+    height: 2.5rem;
     border-radius: 1em;
     border: 1px solid main.$standard-white;
     color: main.$standard-white;
