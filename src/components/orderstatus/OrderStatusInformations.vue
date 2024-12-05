@@ -93,7 +93,6 @@
 
 section {
   width: 100%;
-  background-color: main.$standard-black;
   display: flex;
   justify-content: center;
   background-color: transparent;
@@ -143,6 +142,29 @@ section {
           display: flex;
           flex-direction: column;
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px){
+  section {
+    margin-bottom: 2rem;
+    .container {
+      width: 90%;
+      .title-data{
+        font-size: 1.5rem;
+        margin: 1.5rem 0;
+        text-align: center;
+      }
+      .container-informations {
+        .container-field {
+          flex-direction: column;
+          gap: 1rem;
+          .container-input {
+            width: 100%;
+          }
+        }
+
       }
     }
   }

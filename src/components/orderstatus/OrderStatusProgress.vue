@@ -85,4 +85,11 @@ section {
     }
   }
 }
+@media screen and (max-width: 1024px){
+  section{
+    width: 100%;
+    height: 65vh;
+    border: none;
+  }
+}
 </style>

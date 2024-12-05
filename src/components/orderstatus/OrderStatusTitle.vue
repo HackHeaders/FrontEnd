@@ -23,4 +23,20 @@ section {
     }
   }
 }
+@media screen and (max-width: 1024px){
+  section {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    .container {
+      justify-content: center;
+      h1 {
+        font-size: 2em;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
+}
 </style>
