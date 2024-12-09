@@ -104,6 +104,11 @@ const router = createRouter({
       path: '/testelocal',
       name: 'Teste Local',
       component: () => import('@/views/tests/Location.vue')
+    },
+    {
+      path: "/locateView",
+      name: "LocateView",
+      component: () => import("@/views/tests/LocateView.vue")
     }
   ]
 })
