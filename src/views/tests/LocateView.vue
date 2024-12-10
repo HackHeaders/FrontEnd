@@ -20,10 +20,10 @@ watch(live, async (isLive) => {
 
             const response = await axios.patch("https://api.fexcompany.me/api/orders/6/update-driver-position/",
                 {
-                    driver_position: JSON.stringify({
-                        latitude: coords.value.latitude,
-                        longitude: coords.value.longitude,
-                    })
+                    "driver_position": {
+                        "latitude": coords.value.latitude,
+                        "longitude": coords.value.longitude,
+                    }
                 });
 
         }, 10000);
